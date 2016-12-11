@@ -50,17 +50,23 @@
 
     <script>
         $(function(){
-
+            if ($(window).width() < 750) {
+                $("canvas").hide();
+            }
 
             $("canvas").css("display", "block");
             $("canvas").css("margin", "0 auto");
 
-            var paddingTop = ($("canvas").height())/2;
-            $("canvas").css("margin-top", paddingTop + 'px');
+            var paddingTop = (window.innerHeight - HEIGHT)/2;
+
+            if ($(window).width() < 1250) {
+                $("canvas").css("margin-top", paddingTop + 'px');    
+            }
+            
 
             $("canvas").after('<i id="snapFA" class="fa fa-snapchat" aria-hidden="true"></i>');
 
-            $("#filterBar").css("margin-top", paddingTop + HEIGHT - 150 + 'px');
+            $("#filterBar").css("margin-top", HEIGHT*0.8+ 'px');
 
 
             // TODO: Add images for filters
@@ -106,9 +112,24 @@
             });
         });
 
-        $(window).resize(function(){
-            WIDTH = $(window).width() * 0.75;
-            HEIGHT = WIDTH * 0.75;
+        $(window).resize(function() {
+            
+            var paddingTop = (window.innerHeight - HEIGHT)/2;
+
+            if ($(window).width() < 1250) {
+                $("canvas").css("margin-top", paddingTop + 'px');    
+            }
+            
+            $("#filterBar").css("margin-top", HEIGHT + 'px');
+
+            if ($(window).width() < 750) {
+                $("canvas").hide();
+                $("#filterBar").hide();
+            }
+            else {
+                $("canvas").show();
+                $("#filterBar").show();
+            }
         });
     </script>
 </body>
