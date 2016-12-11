@@ -76,10 +76,6 @@
                 data: {
                     filters: [
                         {
-                            state: 0,
-                            image: "Test2"
-                        },
-                        {
                             state: 1,
                             image: "Test2"
                         },
@@ -94,7 +90,12 @@
                         {
                             state: 4,
                             image: "Test2"
-                        }
+                        },
+                        {
+                            state: 5,
+                            image: "Test2"
+                        },
+
 
                     ]
                 },
@@ -102,6 +103,7 @@
                     changeState: function(filter){
                         state = filter.state;
                         console.info("State changed.");
+                        $("#filterBar").animate({"left": 48 - (filter.state*6) + "%"});
                     }
                 }
             });

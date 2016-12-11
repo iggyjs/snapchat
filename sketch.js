@@ -78,7 +78,7 @@ function draw() {
 	var faceArray = getFaceArray();
 	
 	if (faceArray != false){
-		if (state == 0) {
+		if (state == 1) {
 			// now draw it! the vertices in the face array describe features
 			// of the face.  A full map of these vertices can be found here:
 			// https://github.com/auduno/clmtrackr
@@ -136,7 +136,7 @@ function draw() {
 			}
 		}
 
-		if (state == 1){ //moustache
+		if (state == 2){ //moustache
 			// draws moustache between botttom of nose and upperlip
 	    	var upperLipNoseDistance = dist(faceArray[37][0], faceArray[37][1], faceArray[47][0], faceArray[47][1]);
 	    	var mouthWidth = dist(faceArray[44][0], faceArray[44][1], faceArray[50][0], faceArray[50][1]);
