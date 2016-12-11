@@ -35,6 +35,8 @@ canvas {
 	position: absolute;
 	left: 48%;
 	z-index: 2147483647;
+	max-width: 100%;
+	overflow-x: scroll;
 }
 
 .filter-icon {
