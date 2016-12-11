@@ -46,6 +46,7 @@ function windowResized() {
 		HEIGHT = (3*WIDTH) /4
 	}
 	else {
+		$("canvas").css("margin-top", 0);    
 		HEIGHT = 761;
 	}
 
