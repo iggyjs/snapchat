@@ -8,7 +8,7 @@ var states = [0, 1, 2, 3, 4, 5];
 // Initial state
 var state = 0;
 
-var WIDTH = $(window).width() * 0.65;
+var WIDTH = $(window).width() * 0.75;
 var HEIGHT = WIDTH * 0.75;
 var capture;
 var eyeImage;

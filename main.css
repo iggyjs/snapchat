@@ -29,3 +29,16 @@ canvas {
 	left: 20px;
 	font-size: 40px;
 }
+
+.filter-icon {
+	float: left;
+	margin-right: 10px;
+	height: 60px;
+	width: 60px;
+	z-index: 2147483647;
+	background-color: RGBA(255, 255, 255, 0.1);
+	border-radius: 50%;
+	outline: none;
+	border: 7px solid #F5F5F5;
+	cursor: pointer;
+}
