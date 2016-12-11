@@ -110,7 +110,8 @@
 
 
             $(document).on('click', "#recordButton" , function() {
-                alert("Record button clicked")
+                console.info("Record button clicked.");
+                $("#filterBar").animate({"left": 48 + "%"});
             });
         });
 
