@@ -1,0 +1,31 @@
+html, body{
+	background-color: rgba(250, 224, 123, 1.00)
+}
+
+
+canvas {
+	z-index: 0;
+	border-radius: 24px;
+	border-top-leftradius: 104px;
+}
+
+
+#recordButton{
+	position: absolute;
+	left: 48%;
+	height: 70px;
+	width: 70px;
+	z-index: 2147483647;
+	background-color: RGBA(255, 255, 255, 0.1);
+	border-radius: 50%;
+	outline: none;
+	border: 7px solid #F5F5F5;
+	cursor: pointer;
+}
+
+#snapFA{
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 40px;
+}

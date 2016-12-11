@@ -1,3 +1,5 @@
+var WIDTH = $(window).width() * 0.65;
+var HEIGHT = WIDTH * 0.75;
 // our video capture object
 var capture;
 
@@ -18,11 +20,11 @@ function preload() {
 
 function setup() {
 	// size our canvas
-	createCanvas(320, 240);
+	createCanvas(WIDTH, HEIGHT);
 
 	// create a video capture object
 	capture = createCapture(VIDEO);
-	capture.size(320, 240);
+	capture.size(WIDTH, HEIGHT);
 
 	// prevent the capture from being displayed (we will
 	// choose to display it using the image() function in
@@ -38,7 +40,7 @@ function draw() {
   tint(255);
 	background(255);
 	imageMode(CORNER);
-	image(capture, 0, 0, 320, 240);
+	image(capture, 0, 0, WIDTH, HEIGHT);
 	
 	// get face array
 	var faceArray = getFaceArray();

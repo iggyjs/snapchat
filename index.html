@@ -1,7 +1,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+  <link rel="stylesheet" href="main.css">    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
   <!-- p5.js libraries -->
   <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
   <script language="javascript" src="libraries/p5.dom.js"></script>
@@ -27,9 +31,41 @@
   <script language="javascript" type="text/javascript" src="ck_p5_clmtracker.js"></script>
 
   <!-- our sketch file! -->
+  <script language="javascript" type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>  
   <script language="javascript" type="text/javascript" src="sketch.js"></script>
 </head>
 
-<body>
+<body>  
+    
+
+
+    <script>
+        $(function(){
+
+            $("canvas").css("display", "block");
+            $("canvas").css("margin", "0 auto");
+
+            var paddingTop = ($("canvas").height())/2;
+            $("canvas").css("margin-top", paddingTop + 'px');
+
+            $("canvas").after("<button id='recordButton'></button>");
+
+            $("canvas").after('<i id="snapFA" class="fa fa-snapchat" aria-hidden="true"></i>');
+
+            $("#recordButton").css("margin-top", paddingTop + HEIGHT - 200 + 'px');
+
+            
+
+
+            $(document).on('click', "#recordButton" , function() {
+                 alert('clicked');
+            });
+        });
+
+        $(window).resize(function(){
+            WIDTH = $(window).width() * 0.75;
+            HEIGHT = WIDTH * 0.75;
+        });
+    </script>
 </body>
 </html>
