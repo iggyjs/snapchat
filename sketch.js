@@ -50,6 +50,7 @@ function windowResized() {
 		HEIGHT = 761;
 	}
 
+	$("#filterBar").css("margin-top", HEIGHT*0.8+ 'px');
 	$("#renderCanvas").hide();
   	resizeCanvas(WIDTH, HEIGHT);
 }
