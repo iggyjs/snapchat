@@ -8,29 +8,54 @@ var states = [0, 1, 2, 3, 4, 5];
 // Initial state
 var state = 0;
 
-var WIDTH = $(window).width() * 0.65;
-var HEIGHT = WIDTH * 0.75;
+var WIDTH, HEIGHT;
 var capture;
 var eyeImage;
 var rainbowImage, rainbowSound;
 var moustacheImage;
 var rainbows = [];
 
+
 function preload() {
-  //state 0 
-  eyeImage = loadImage("googly_eye.png");
-  rainbowImage = loadImage("rainbow.jpg");
-  rainbowSound = loadSound("assets/sounds/rainbow_sound.mp3");
 
-  //state 1
-  moustacheImage = loadImage("moustache.png");
+	WIDTH = window.innerWidth* 0.8;
+	if ((3*WIDTH)/4 < 761) {
+		HEIGHT = (3*WIDTH) /4;
+	}
+	else {
+		HEIGHT = 761;
+	}
 
-  //...
+	//state 0 
+	eyeImage = loadImage("googly_eye.png");
+	rainbowImage = loadImage("rainbow.jpg");
+
+	// UNCOMMENT
+	// rainbowSound = loadSound("assets/sounds/rainbow_sound.mp3");
+
+	//state 1
+	moustacheImage = loadImage("moustache.png");
+
+	//...
+}
+
+function windowResized() {
+
+	WIDTH = window.innerWidth* 0.8;
+	if ((3*WIDTH)/4 < 761) {
+		HEIGHT = (3*WIDTH) /4
+	}
+	else {
+		HEIGHT = 761;
+	}
+
+	$("#renderCanvas").hide();
+  	resizeCanvas(WIDTH, HEIGHT);
 }
 
 function setup() {
 	// State 1
-	rainbowSound.setVolume(0.1);
+	// rainbowSound.setVolume(0.1);
 
 	// size our canvas
 	createCanvas(WIDTH, HEIGHT);
@@ -87,12 +112,13 @@ function draw() {
 				
 				// put this rainbow object into our rainbows array
 				rainbows.push(temp);
-
-				rainbowSound.play();
+				// UNCOMMENT
+				// rainbowSound.play();
 			}
 
 			else { //mouth isn't open
-				rainbowSound.stop();
+				// UNCOMMENT
+				// rainbowSound.stop();
 			}
 
 			// draw all rainbows
