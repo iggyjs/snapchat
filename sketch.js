@@ -6,7 +6,7 @@ var capture;
 // artwork
 var eyeImage;
 var rainbowImage;
-
+var moustacheImage;
 // an array for our rainbows
 var rainbows = [];
 
@@ -16,6 +16,9 @@ function preload() {
 
   // load in our rainbow image
   rainbowImage = loadImage("rainbow.jpg");
+  
+  // load moustache
+  moustacheImage = loadImage("moustache.png");
 }
 
 function setup() {
@@ -77,6 +80,10 @@ function draw() {
 		// compute the distance between the edges of the mouth
 		var mouthWidth = dist(faceArray[44][0], faceArray[44][1], faceArray[50][0], faceArray[50][1]);
 		
+		// draws moustache between botttom of nose and upperlip
+    var upperLipNoseDistance = dist(faceArray[37][0], faceArray[37][1], faceArray[47][0], faceArray[47][1]);
+	  image(moustacheImage, faceArray[37][0], faceArray[37][1], mouthWidth, upperLipNoseDistance);
+
 		// does the mouth opening take up at least 25% of this space?
 		if (openDistance/lipDistance > 0.4)
 		{
