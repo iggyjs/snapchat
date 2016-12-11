@@ -12,7 +12,7 @@ var WIDTH = $(window).width() * 0.65;
 var HEIGHT = WIDTH * 0.75;
 var capture;
 var eyeImage;
-var rainbowImage;
+var rainbowImage, rainbowSound;
 var moustacheImage;
 var rainbows = [];
 
@@ -20,6 +20,7 @@ function preload() {
   //state 0 
   eyeImage = loadImage("googly_eye.png");
   rainbowImage = loadImage("rainbow.jpg");
+  rainbowSound = loadSound("assets/sounds/rainbow_sound.mp3");
 
   //state 1
   moustacheImage = loadImage("moustache.png");
@@ -28,6 +29,9 @@ function preload() {
 }
 
 function setup() {
+	// State 1
+	rainbowSound.setVolume(0.1);
+
 	// size our canvas
 	createCanvas(WIDTH, HEIGHT);
 
@@ -82,7 +86,13 @@ function draw() {
 				var temp = new Rainbow(faceArray[57][0], faceArray[57][1], mouthWidth, openDistance);
 				
 				// put this rainbow object into our rainbows array
-				rainbows.push( temp );
+				rainbows.push(temp);
+
+				rainbowSound.play();
+			}
+
+			else { //mouth isn't open
+				rainbowSound.stop();
 			}
 
 			// draw all rainbows
