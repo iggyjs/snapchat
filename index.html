@@ -38,11 +38,14 @@
 </head>
 
 <body>  
-    
-  <div id="filterBar">
-    <div v-on:click="changeState(filter)" v-for="filter in filters" class="filter-icon"></div>
+  
+    <center> 
+      <div id="filterBar">
+        <button id='recordButton'></button>
+        <div v-on:click="changeState(filter)" v-for="filter in filters" class="filter-icon"></div>
 
-  </div>
+      </div>
+    </center>
 
 
     <script>
@@ -55,11 +58,9 @@
             var paddingTop = ($("canvas").height())/2;
             $("canvas").css("margin-top", paddingTop + 'px');
 
-            $("canvas").after("<button id='recordButton'></button>");
-
             $("canvas").after('<i id="snapFA" class="fa fa-snapchat" aria-hidden="true"></i>');
 
-            $("#recordButton").css("margin-top", paddingTop + HEIGHT - 150 + 'px');
+            $("#filterBar").css("margin-top", paddingTop + HEIGHT - 150 + 'px');
 
 
             var filterBar = new Vue({
@@ -99,7 +100,7 @@
 
 
             $(document).on('click', "#recordButton" , function() {
-                 state = 1;
+                alert("Record button clicked")
             });
         });
 

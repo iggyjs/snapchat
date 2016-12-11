@@ -11,12 +11,13 @@ canvas {
 
 
 #recordButton{
-	position: absolute;
-	left: 48%;
-	height: 70px;
-	width: 70px;
+	float: left;
+	margin-right: 10px;
+	height: 79px;
+	width: 79px;
 	z-index: 2147483647;
-	background-color: RGBA(255, 255, 255, 0.1);
+	/*background-color: RGBA(255, 255, 255, 0.1);*/
+	background-color: #FF5F5F;
 	border-radius: 50%;
 	outline: none;
 	border: 7px solid #F5F5F5;
@@ -28,6 +29,12 @@ canvas {
 	top: 20px;
 	left: 20px;
 	font-size: 40px;
+}
+
+#filterBar{
+	position: absolute;
+	left: 48%;
+	z-index: 2147483647;
 }
 
 .filter-icon {
