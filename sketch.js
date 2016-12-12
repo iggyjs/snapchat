@@ -40,14 +40,13 @@ function preload() {
 }
 
 function windowResized() {
-
-	WIDTH = window.innerWidth* 0.8;
-	if ((3*WIDTH)/4 < 761) {
-		HEIGHT = (3*WIDTH) /4
+	if (window.innerWidth* 0.8 < 943){
+		WIDTH = window.innerWidth* 0.8;
+		HEIGHT = 761;
 	}
 	else {
-		$("canvas").css("margin-top", 0);    
-		HEIGHT = 761;
+		WIDTH = 943;
+		HEIGHT = (3*WIDTH) /4;
 	}
 
 	$("#filterBar").css("margin-top", HEIGHT*0.8+ 'px');

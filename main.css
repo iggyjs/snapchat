@@ -5,8 +5,9 @@ body{
 
 canvas {
 	z-index: 0;
-	border-radius: 24px;
-	border-top-leftradius: 104px;
+	/*border-radius: 24px;*/
+	border: dashed 2px #9A9A9A;
+
 }
 
 
