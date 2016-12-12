@@ -146,6 +146,22 @@ function draw() {
 
 }
 
+// if space is pressed, takes picture
+function keyPressed() {
+  if (keyCode == 32) {
+    redraw();
+    takePicture();
+  }
+}
+
+function takePicture() {
+  // grabs all pixels from canvas
+  var picturePixels = get(0, 0, WIDTH, HEIGHT);
+  var randomID = Math.floor((Math.random() * 1000) + 1);
+  // saves picture and names it with an ID
+  save(picturePixels, 'snapchat_clone_' + randomID + '.png');
+  console.log("Picture taken! You look great!")
+}
 
 //State 1 Classes
 function Rainbow(x, y, w, h) {
