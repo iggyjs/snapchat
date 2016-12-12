@@ -1,15 +1,27 @@
 body{
-	background-color: RGBA(255, 252, 0, 0.7);
+	background-color: #F5F5F5;
 }
 
 
 canvas {
 	z-index: 0;
-	/*border-radius: 24px;*/
+	float: right;
 	border: dashed 2px #9A9A9A;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}	
 
+#topBar{
+	width: 100%;
+	height: 80px;
+	background-color: #FFE674;
+	position: absolute;
+	z-index: -1;
+	margin-top:1px;
+	top:0;
+	left: 0;
 }
-
 
 #recordButton{
 	float: left;
@@ -27,17 +39,24 @@ canvas {
 
 #snapFA{
 	position: absolute;
+	color: #434343;
 	top: 20px;
-	left: 20px;
+	left: 30px;
 	font-size: 40px;
+}
+
+#toolbar{
+	/*position: relative;*/
+
 }
 
 #filterBar{
 	position: absolute;
-	left: 48%;
+	left: 57%;
 	z-index: 2147483647;
 	max-width: 100%;
-	overflow-x: scroll;
+	overflow-x: hidden;
+    bottom: 40px;
 }
 
 .filter-icon {

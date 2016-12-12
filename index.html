@@ -39,11 +39,13 @@
 
 <body>  
   
-    <center> 
-      <div id="filterBar">
-        <button id='recordButton'></button>
-        <div v-on:click="changeState(filter)" v-for="filter in filters" class="filter-icon"></div>
+    <center>
+      <div id="toolbar">
+        <div id="filterBar">
+          <button id='recordButton'></button>
+          <div v-on:click="changeState(filter)" v-for="filter in filters" class="filter-icon"></div>
 
+        </div>
       </div>
     </center>
 
@@ -54,20 +56,12 @@
                 $("canvas").hide();
             }
 
-            $("canvas").css("display", "block");
-            $("canvas").css("margin", "0 auto");
-
             var paddingTop = (window.innerHeight - HEIGHT)/2;
-
-            if ($(window).width() < 1250) {
-                $("canvas").css("margin-top", paddingTop + 'px');    
-            }
             
 
-            $("canvas").after('<i id="snapFA" class="fa fa-snapchat" aria-hidden="true"></i>');
+            $("canvas").after('<div id="topBar"><i id="snapFA" class="fa fa-snapchat" aria-hidden="true"></i></div>');
 
-            $("#filterBar").css("margin-top", HEIGHT*0.8+ 'px');
-
+  
 
             // TODO: Add images for filters
 
@@ -103,7 +97,7 @@
                     changeState: function(filter){
                         state = filter.state;
                         console.info("State changed.");
-                        $("#filterBar").animate({"left": 48 - (filter.state*6) + "%"});
+                        $("#filterBar").animate({"left": 57 - (filter.state*6) + "%"});
                     }
                 }
             });
@@ -111,20 +105,14 @@
 
             $(document).on('click', "#recordButton" , function() {
                 console.info("Record button clicked.");
-                $("#filterBar").animate({"left": 48 + "%"});
+                $("#filterBar").animate({"left": 57 + "%"});
+                redraw();
+                takePicture();
             });
         });
 
         $(window).resize(function() {
             
-            var paddingTop = (window.innerHeight - HEIGHT)/2;
-
-            if ($(window).width() < 1250) {
-                $("canvas").css("margin-top", paddingTop + 'px');    
-            }
-            
-            $("#filterBar").css("margin-top", HEIGHT + 'px');
-
             if ($(window).width() < 750) {
                 $("canvas").hide();
                 $("#filterBar").hide();

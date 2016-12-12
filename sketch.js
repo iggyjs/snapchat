@@ -18,13 +18,15 @@ var rainbows = [];
 
 function preload() {
 
-	WIDTH = window.innerWidth* 0.8;
-	if ((3*WIDTH)/4 < 761) {
-		HEIGHT = (3*WIDTH) /4;
-	}
-	else {
-		HEIGHT = 761;
-	}
+	WIDTH = window.innerWidth * 0.8;
+	HEIGHT = (3 * WIDTH)/4;
+
+	// if ((3*WIDTH)/4 < 761) {
+	// 	HEIGHT = (3 * WIDTH)/4;
+	// }
+	// else {
+	// 	HEIGHT = 761;
+	// }
 
 	//state 0 
 	eyeImage = loadImage("googly_eye.png");
@@ -40,18 +42,12 @@ function preload() {
 }
 
 function windowResized() {
-	if (window.innerWidth* 0.8 < 943){
-		WIDTH = window.innerWidth* 0.8;
-		HEIGHT = 761;
-	}
-	else {
-		WIDTH = 943;
-		HEIGHT = (3*WIDTH) /4;
-	}
+	WIDTH = window.innerWidth * 0.8;
+	HEIGHT = (3 * WIDTH)/4;
 
-	$("#filterBar").css("margin-top", HEIGHT*0.8+ 'px');
+	$("#toolbar").css("margin-top", HEIGHT*0.8+ 'px');
 	$("#renderCanvas").hide();
-  	resizeCanvas(WIDTH, HEIGHT);
+  	resizeCanvas(WIDTH, HEIGHT-100);
 }
 
 function setup() {
@@ -59,7 +55,7 @@ function setup() {
 	// rainbowSound.setVolume(0.1);
 
 	// size our canvas
-	createCanvas(WIDTH, HEIGHT);
+	createCanvas(WIDTH, HEIGHT-100);
 
 	// create a video capture object
 	capture = createCapture(VIDEO);
@@ -146,12 +142,12 @@ function draw() {
 }
 
 // if space is pressed, takes picture
-function keyPressed() {
-  if (keyCode == 32) {
-    redraw();
-    takePicture();
-  }
-}
+// function keyPressed() {
+//   if (keyCode == 32) {
+//     redraw();
+//     takePicture();
+//   }
+// }
 
 function takePicture() {
   // grabs all pixels from canvas
