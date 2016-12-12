@@ -43,7 +43,9 @@
       <div id="toolbar">
         <div id="filterBar">
           <button id='recordButton'></button>
-          <div v-on:click="changeState(filter)" v-for="filter in filters" class="filter-icon"></div>
+          <div v-on:click="changeState(filter)" v-for="filter in filters" class="filter-icon">
+              <img class="filter-icon-image" v-if="filter.image !== 0" v-bind:src="filter.image">
+          </div>
 
         </div>
       </div>
@@ -63,7 +65,7 @@
 
   
 
-            // TODO: Add images for filters
+            // TODO: Add images for filters and camera button
 
             var filterBar = new Vue({
                 el: "#filterBar",
@@ -71,23 +73,23 @@
                     filters: [
                         {
                             state: 1,
-                            image: "Test2"
+                            image: "assets/images/rainbow_filter_icon.svg"
                         },
                         {
                             state: 2,
-                            image: "Test2"
+                            image: "assets/images/moustache_filter_icon.svg"
                         },
                         {
                             state: 3,
-                            image: "Test2"
+                            image: 0
                         },
                         {
                             state: 4,
-                            image: "Test2"
+                            image: 0
                         },
                         {
                             state: 5,
-                            image: "Test2"
+                            image: 0
                         },
 
 

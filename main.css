@@ -19,7 +19,7 @@ canvas {
 	height: 80px;
 	background-color: #FFE674;
 	position: absolute;
-	z-index: 10;
+	z-index: 100;
 	margin-top:1px;
 	top:0;
 	left: 0;
@@ -72,4 +72,9 @@ canvas {
 	outline: none;
 	border: 7px solid #F5F5F5;
 	cursor: pointer;
+}
+
+.filter-icon-image{
+	height: 60px;
+	width: 60px;
 }
