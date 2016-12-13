@@ -7,12 +7,13 @@ var states = [0, 1, 2, 3, 4, 5];
 
 // Initial state
 var state = 0;
+var snowflakes = [];
 
 var WIDTH, HEIGHT;
 var capture;
 var eyeImage;
 var rainbowImage, rainbowSound;
-var moustacheImage;
+var moustacheImage, flake;
 var rainbows = [];
 
 var facePoints = {
@@ -33,16 +34,10 @@ function preload() {
 	WIDTH = window.innerWidth * 0.8;
 	HEIGHT = (3 * WIDTH)/4;
 
-	// if ((3*WIDTH)/4 < 761) {
-	// 	HEIGHT = (3 * WIDTH)/4;
-	// }
-	// else {
-	// 	HEIGHT = 761;
-	// }
-
 	//state 0 
 	eyeImage = loadImage("googly_eye.png");
 	rainbowImage = loadImage("rainbow.jpg");
+	flake = loadImage("assets/images/flake.svg");
 
 	// UNCOMMENT
 	// rainbowSound = loadSound("assets/sounds/rainbow_sound.mp3");
@@ -74,6 +69,12 @@ function setup() {
 	capture.size(WIDTH, HEIGHT);
 	capture.hide();
 	startTrackerFromProcessing(capture);
+
+	noiseDetail(24);
+
+	  for (var i = 0; i < 100; i++) {
+	    snowflakes.push(new Snowflake(0, WIDTH));
+	  }
 }
 
 function draw() {
@@ -86,41 +87,22 @@ function draw() {
 	
 	if (faceArray != false){
 		if (state == 1) {
-			// now draw it! the vertices in the face array describe features
-			// of the face.  A full map of these vertices can be found here:
-			// https://github.com/auduno/clmtrackr
-			
-			// each element of the faceArray contains two sub-elements - the x
-			// position and the y position
-
-			// compute the distance between the eyes
 			var eyeSize = dist(faceArray[23][0], faceArray[23][1], faceArray[25][0], faceArray[25][1]) * 2; 		
-			
-			// draw pupils
+		
 			imageMode(CENTER);
 			image(eyeImage, faceArray[27][0], faceArray[27][1], eyeSize, eyeSize);
 			image(eyeImage, faceArray[32][0], faceArray[32][1], eyeSize, eyeSize);
 			
 			
-			
-			// compute the distance between the top of the upper lip and the bottom of lower lip
 			var lipDistance = dist(faceArray[47][0], faceArray[47][1], faceArray[53][0], faceArray[53][1]);
-
-			// compute the distance between the lips (mouth opening)
 			var openDistance = dist(faceArray[60][0], faceArray[60][1], faceArray[57][0], faceArray[57][1]);
-			
-			// compute the distance between the edges of the mouth
 			var mouthWidth = dist(faceArray[44][0], faceArray[44][1], faceArray[50][0], faceArray[50][1]);
 			
 			
-
-			// does the mouth opening take up at least 25% of this space?
-			if (openDistance/lipDistance > 0.4){
-				// create a rainbow object
-				var temp = new Rainbow(faceArray[57][0], faceArray[57][1], mouthWidth, openDistance);
-				
-				// put this rainbow object into our rainbows array
-				rainbows.push(temp);
+			if (openDistance/lipDistance > 0.5){
+				var tempRainBow = new Rainbow(faceArray[57][0], faceArray[57][1], mouthWidth, openDistance);
+			
+				rainbows.push(tempRainBow);
 				// UNCOMMENT
 				// rainbowSound.play();
 			}
@@ -130,14 +112,10 @@ function draw() {
 				// rainbowSound.stop();
 			}
 
-			// draw all rainbows
 			for (var i = 0; i < rainbows.length; i++){
-				// display the rainbow and ask it if it is off the screen
 				var offScreen = rainbows[i].display();
-				
-				// if it is off the screen remove it from the array
-				if (offScreen)
-				{
+				// remove reaiboz
+				if (offScreen){
 					rainbows.splice(i, 1);
 				}
 			}
@@ -150,47 +128,59 @@ function draw() {
 			image(moustacheImage, faceArray[37][0], faceArray[37][1], mouthWidth, upperLipNoseDistance);		
 		}
 
+		if (state ==3){
+			for (var i = 0; i < snowflakes.length; i++) {
+			    snowflakes[i].display();
+			    snowflakes[i].move();
+			}
+		}
+
 		if (state ==4){
 			stroke(255,255,255);
-
-			// each element of the faceArray contains two sub-elements - the x
-			// position and the y position
-			
-			// draw all points that have been defined above
-			for (var key in facePoints)
-			{
-				// draw the shape
-				var arrayLength = facePoints[key]['points'].length;
-				for (var i = 0; i < arrayLength-1; i++)
-				{	
-					line(faceArray[ facePoints[key]['points'][i] ][0], faceArray[ facePoints[key]['points'][i] ][1], faceArray[ facePoints[key]['points'][i+1] ][0], faceArray[ facePoints[key]['points'][i+1] ][1]);					
-				}
-				
-				// if the shape is closed we should connect the last point to the first point
-				if (facePoints[key]['closed'])
-				{
-					line(faceArray[ facePoints[key]['points'][ arrayLength-1 ] ][0], faceArray[ facePoints[key]['points'][ arrayLength-1 ] ][1], faceArray[ facePoints[key]['points'][0] ][0], faceArray[ facePoints[key]['points'][0] ][1]);
-				}
-			}
-			
-			// draw pupils
-			fill(255);
-			noStroke();
-			
 			ellipse(faceArray[27][0], faceArray[27][1], 5, 5);
 			ellipse(faceArray[32][0], faceArray[32][1], 5, 5);
+
+			var keys = ["rightEye", "leftEye", "leftEyebrow", "rightEyebrow", "nose"];
+			
+			for (var i=0; i<keys.length; i++){
+				var key = keys[i];
+				var group = facePoints[key]['points'].length;
+				
+				for (var j = 0; j < group-1; j++){	
+					line(faceArray[facePoints[key]['points'][j]][0], faceArray[facePoints[key]['points'][j]][1], faceArray[ facePoints[key]['points'][j+1] ][0], faceArray[ facePoints[key]['points'][j+1] ][1]);					
+				}
+				
+				if (facePoints[key]['closed']){
+					line(faceArray[ facePoints[key]['points'][ group-1 ] ][0], faceArray[ facePoints[key]['points'][ group-1 ] ][1], faceArray[ facePoints[key]['points'][0] ][0], faceArray[ facePoints[key]['points'][0] ][1]);
+				}
+
+			}
+
+			line(faceArray[27][0], faceArray[27][1],faceArray[32][0], faceArray[32][1]);
+			var d = dist(faceArray[27][0], faceArray[27][1], faceArray[32][0], faceArray[32][1]);
+			d /= 2;
+			line(faceArray[27][0]+d, faceArray[27][1],faceArray[facePoints['lowerLip']['points'][3]][0], faceArray[facePoints['lowerLip']['points'][3]][1])
+
+			line(faceArray[facePoints['leftEyebrow']['points'][0]][0], faceArray[facePoints['leftEyebrow']['points'][0]][1],faceArray[facePoints['lowerLip']['points'][3]][0], faceArray[facePoints['lowerLip']['points'][3]][1])
+
+			var lastPointRightEyebrow = facePoints['rightEyebrow']['points'].length - 1;
+
+			line(faceArray[facePoints['rightEyebrow']['points'][lastPointRightEyebrow]][0], faceArray[facePoints['rightEyebrow']['points'][lastPointRightEyebrow]][1],faceArray[facePoints['lowerLip']['points'][3]][0], faceArray[facePoints['lowerLip']['points'][3]][1])
+
+			var group = facePoints['lowerLip']['points'].length;
+			
+			for (var j = 0; j < group-1; j++){	
+				line(faceArray[facePoints['lowerLip']['points'][j]][0], faceArray[facePoints['lowerLip']['points'][j]][1], faceArray[ facePoints['lowerLip']['points'][j+1] ][0], faceArray[ facePoints['lowerLip']['points'][j+1] ][1]);					
+			}
+			
+			if (facePoints['lowerLip']['closed']){
+				line(faceArray[ facePoints['lowerLip']['points'][ group-1 ] ][0], faceArray[ facePoints['lowerLip']['points'][ group-1 ] ][1], faceArray[ facePoints['lowerLip']['points'][0] ][0], faceArray[ facePoints['lowerLip']['points'][0] ][1]);
+			}
 		}
 	}
 
 }
 
-// if space is pressed, takes picture
-// function keyPressed() {
-//   if (keyCode == 32) {
-//     redraw();
-//     takePicture();
-//   }
-// }
 
 function takePicture() {
   // grabs all pixels from canvas
@@ -198,10 +188,10 @@ function takePicture() {
   var randomID = Math.floor((Math.random() * 1000) + 1);
   // saves picture and names it with an ID
   save(picturePixels, 'snapchat_clone_' + randomID + '.png');
-  console.log("Picture taken! You look great!")
+  
 }
 
-//State 1 Classes
+//State 1 Class
 function Rainbow(x, y, w, h) {
 
 	// everything this rainbow needs to know about itself (instance variables)
@@ -231,4 +221,42 @@ function Rainbow(x, y, w, h) {
 	}
 }
 
-//State 2 Classes
+//State 3 Classe(s)
+
+function Snowflake(x, xMax) {
+  this.asset = flake;
+  this.x = random(x, xMax);
+  this.y = random(-250, 0);
+  this.angle = 0;
+  this.xOffset = random(0, 3);
+  this.ySpeed = random(1,2);
+
+  this.display = function() {
+
+    push();
+
+    translate(this.x, this.y);
+    rotate(radians(this.angle));
+    imageMode(CENTER);
+    image(this.asset, 0, 0, 10, 10);
+
+    pop();
+
+    this.angle += 1;
+  }
+
+  this.move = function() {
+    var xNoise = map(noise(this.xOffset), 0, 1, -1, 1);
+    
+    this.x += xNoise;
+    this.y += this.ySpeed;
+
+    this.xOffset += 0.01;
+
+    if (this.y > HEIGHT) {
+      this.x = random(x, xMax);
+      this.y = random(-10, 0);
+    }
+  }
+
+}
