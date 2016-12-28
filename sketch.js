@@ -1,9 +1,9 @@
-/* Transitions states so show different filterss
+/* Transitions states so show different filters
  *	0 = Rainbow mouth
  *	1 = Moustache
  *	...
  */
-var states = [0, 1, 2, 3, 4, 5];
+var states = [0, 1, 2, 3, 4];
 
 // Initial state
 var state = 0;
